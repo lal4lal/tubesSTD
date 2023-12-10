@@ -23,22 +23,17 @@ struct infotypeGroup {
 };
 
 typedef struct elmUser *adrUser;
-
+typedef struct elmRel *adrRel;
+typedef struct elmGroup *adrGroup;
 struct elmUser {
     infotypeUser infoUser;
     adrUser nextUser;
     adrRel firstRel;
 };
-
-typedef struct elmRel *adrRel;
-
 struct elmRel {
     adrGroup nextGroup;
     adrRel nextRel;
 };
-
-typedef struct elmGroup *adrGroup;
-
 struct elmGroup {
     infotypeGroup infoGroup;
     adrGroup nextGroup;
