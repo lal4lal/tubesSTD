@@ -30,7 +30,7 @@ int main() {
     if(searchData_Group(LG,"SobatHacker") == NULL) {
         cout << "Data not found"<< endl;
     }else {
-        cout << "Data found in address " << searchData_Group << endl;
+        cout << "Data found in address " << searchData_Group(LG, "SobatHacker") << endl;
     }
 
     return 0;
