@@ -50,7 +50,7 @@ void insertLast_Group(listGroup &LG, adrGroup pGroup){
         nextGroup(Q) = pGroup;
         nextGroup(pGroup) = firstGroup(LG);
     }
-};
+}
 
 // 2.Show all data grup (5)
 void showAlldata_Group(listGroup LG) {
@@ -69,10 +69,80 @@ void showAlldata_Group(listGroup LG) {
         cout << "Group Name : " << infoGroup(Q).groupName << endl;
         cout << "Member : " << infoGroup(Q).numOfMember << endl;
     }
-};
+}
 
 // 3.	Menghapus data grup beserta relasinya (15)
-void deleteGroup_rel(listGroup LG, adrGroup &delGroup);
+void deleteGroup(listGroup &LG, adrGroup &delGroup, string namaGroup) {
+    delGroup = searchData_Group(LG, namaGroup);
+    if (delGroup != NULL) {
+        if (delGroup == firstGroup(LG) && nextGroup(delGroup) == firstGroup(LG)) { // Jika delGroup ada di first dan hanya 1 elemen di list Group
+            firstGroup(LG) = NULL;
+            nextGroup(delGroup) = NULL;
+        } else if (delGroup == firstGroup(LG) && nextGroup(delGroup) != firstGroup(LG)) { // Jika delGroup ada di first dan ada lebih dari 1 elemen di list Group
+            adrGroup lastGroup = nextGroup(delGroup);
+            while (nextGroup(lastGroup) != firstGroup(LG)) {
+                lastGroup = nextGroup(lastGroup);
+            }
+            nextGroup(lastGroup) = nextGroup(firstGroup(LG));
+            firstGroup(LG) = nextGroup(firstGroup(LG));
+            nextGroup(delGroup) = NULL;
+        } else if (nextGroup(delGroup) == firstGroup(LG)) { // jika delGroup ada di akhir list Group
+            adrGroup lastGroup = firstGroup(LG);
+            while (nextGroup(lastGroup) != delGroup) {
+                lastGroup = nextGroup(lastGroup);
+            }
+            nextGroup(delGroup) = NULL;
+            nextGroup(lastGroup) = firstGroup(LG);
+        } else { // jika delGroup ada ditengah tengah list Group
+            adrGroup prevDel = firstGroup(LG);
+             while (nextGroup(prevDel) != delGroup) {
+                prevDel = nextGroup(prevDel);
+            }
+            nextGroup(prevDel) = nextGroup(delGroup);
+            nextGroup(delGroup) = NULL;
+        }
+    } else {
+        cout << "Group doesn't exist" << endl;
+    }
+}
+
+void deleteRel(listUser &LU, adrRel prec, adrRel &delRel, adrUser pUser) {
+    if (prec == firstRel(pUser) && nextRel(prec) == NULL) { // jika prec ada di first dan hanya ada 1 elemen di list Rel
+        firstRel(pUser) = NULL;
+    } else if (prec == firstRel(pUser) && nextRel(prec) != NULL) { // jika prec ada di first dan ada lebih dari 1 elemen di list Rel
+        firstRel(pUser) = nextRel(prec);
+        nextRel(prec) = NULL;
+    } else if (nextRel(prec) == NULL) { // jika prec ada di akhir list Rel
+        adrRel pRel = firstRel(pUser);
+        while (nextRel(pRel) != prec) {
+            pRel = nextRel(pRel);
+        }
+        nextRel(pRel) = NULL;
+    } else { // jika prec ada di tengah tengah list Rel
+        adrRel pRel = firstRel(pUser);
+        while (nextRel(pRel) != prec) {
+            pRel = nextRel(pRel);
+        }
+        nextRel(pRel) = nextRel(prec);
+        nextRel(prec) = NULL;
+    }
+    delRel = prec;
+}
+
+void deleteGroup_rel(listGroup &LG, listUser &LU, string namaGroup , adrGroup &delGroup) {
+    adrUser pUser = firstUser(LU);
+    adrRel delRel = NULL;
+    while (pUser != NULL) {
+        adrRel pRel = firstRel(pUser);
+        while (pRel != NULL) {
+            if (infoGroup(nextGroup(pRel)).groupName == namaGroup) { // cek jika relasi terhubung ke namaGroup
+                deleteRel(LU, pRel, delRel, pUser);
+            }
+            pRel = nextRel(pRel);
+        }
+    }
+    deleteGroup(LG, delGroup, namaGroup);
+}
 
 // 4. Mencari data grup (5) & Mencari data user (5) 
 adrGroup searchData_Group(listGroup LG, string namaGroup) {
@@ -97,6 +167,6 @@ adrGroup searchData_Group(listGroup LG, string namaGroup) {
     } else {
         return NULL;
     }
-};
+}
 adrUser searchData_User(listUser LU);
 

@@ -61,7 +61,9 @@ void insertLast_Group(listGroup &LG, adrGroup pGroup);
 void showAlldata_Group(listGroup LG);
 
 // 3.	Menghapus data grup beserta relasinya (15)
-void deleteGroup_rel(listGroup LG, adrGroup &delGroup);
+void deleteGroup(listGroup &LG, adrGroup &delGroup, string namaGroup);
+void deleteRel(listUser &LU, adrRel prec, adrRel &delRel, adrUser pUser);
+void deleteGroup_rel(listGroup &LG, listUser &LU, string namaGroup , adrGroup &delGroup);
 
 // 4. Mencari data grup (5) & Mencari data user (5) 
 adrGroup searchData_Group(listGroup LG,string namaGroup);
