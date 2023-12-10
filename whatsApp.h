@@ -3,9 +3,14 @@
 
 #include <iostream>
 using namespace std;
-#define info(P) P->info
-#define next(P) P->next
-#define first(L) L.first
+#define infoGroup(P) P->infoGroup
+#define infoUser(P) P->infoUser
+#define nextRel(P) P->nextRel
+#define nextUser(P) P->nextUser
+#define nextGroup(P) P->nextGroup
+#define firstRel(P) P->firstRel
+#define firstUser(L) L.firstUser
+#define firstGroup(L) L.firstGroup
 
 struct infotypeUser {
     string nama;
@@ -18,8 +23,6 @@ struct infotypeGroup {
 };
 
 typedef struct elmUser *adrUser;
-
-
 
 struct elmUser {
     infotypeUser infoUser;
@@ -48,5 +51,11 @@ struct listUser {
 struct listGroup {
     adrGroup firstGroup;
 };
+
+void createListUser(listUser &LU);
+void createListGroup(listGroup &LG);
+adrUser createElmUser(infotypeUser x);
+adrGroup createElmGroup(infotypeGroup x);
+adrRel createElmRel(adrGroup pGroup);
 
 #endif /*WHATSAPP_H_INCLUDED*/
