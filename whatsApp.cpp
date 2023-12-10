@@ -1,9 +1,5 @@
 #include "whatsApp.h"
 
-void menu() {
-    cout << "heloobitch" << endl;
-}
-
 void createListUser(listUser &LU) {
     firstUser(LU) = NULL;
 }
