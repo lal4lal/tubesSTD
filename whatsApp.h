@@ -10,7 +10,7 @@ using namespace std;
 #define nextGroup(P) P->nextGroup
 #define firstRel(P) P->firstRel
 #define firstUser(L) L.firstUser
-#define firstGroup(L) L.firstGroup
+#define firstGroup(L) LG.firstGroup
 
 struct infotypeUser {
     string nama;
@@ -53,4 +53,18 @@ adrUser createElmUser(infotypeUser x);
 adrGroup createElmGroup(infotypeGroup x);
 adrRel createElmRel(adrGroup pGroup);
 
+
+// 1. Insert data grup dari belakang (5)
+void insertLast_Group(listGroup &LG, adrGroup pGroup);
+
+// 2.Show all data grup (5)
+void showAlldata_Group(listGroup LG);
+
+// 3.	Menghapus data grup beserta relasinya (15)
+void deleteGroup_rel(listGroup LG, adrGroup &delGroup);
+
+// 4. Mencari data grup (5) & Mencari data user (5) 
+adrGroup searchData_Group(listGroup LG,string namaGroup);
+adrUser searchData_User(listUser LU);
+void menu();
 #endif /*WHATSAPP_H_INCLUDED*/
