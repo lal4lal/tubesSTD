@@ -48,24 +48,6 @@ void insertLast_Group(listGroup &LG, adrGroup pGroup){
     }
 }
 
-// 2.Show all data grup (5)
-void showAlldata_Group(listGroup LG) {
-    if (firstGroup(LG) == NULL) {
-        cout << "Group isn't created yet";
-    } else {
-        adrGroup Q;
-        Q = firstGroup(LG);
-        while (nextGroup(Q) != firstGroup(LG)) {
-            cout << "Group Name : " << infoGroup(Q).groupName << endl;
-            cout << "Member : " << infoGroup(Q).numOfMember << endl;
-            cout << endl;
-            Q = nextGroup(Q);
-        }
-        cout << "Group Name : " << infoGroup(Q).groupName << endl;
-        cout << "Member : " << infoGroup(Q).numOfMember << endl;
-    }
-}
-
 // 3.	Menghapus data grup beserta relasinya (15)
 void deleteGroup(listGroup &LG, adrGroup &delGroup, string namaGroup) {
     delGroup = searchData_Group(LG, namaGroup);
@@ -74,13 +56,13 @@ void deleteGroup(listGroup &LG, adrGroup &delGroup, string namaGroup) {
             firstGroup(LG) = NULL;
             nextGroup(delGroup) = NULL;
         } else if (delGroup == firstGroup(LG) && nextGroup(delGroup) != firstGroup(LG)) { // Jika delGroup ada di first dan ada lebih dari 1 elemen di list Group
-            adrGroup lastGroup = nextGroup(delGroup);
+            adrGroup lastGroup = firstGroup(LG);
             while (nextGroup(lastGroup) != firstGroup(LG)) {
                 lastGroup = nextGroup(lastGroup);
             }
             nextGroup(lastGroup) = nextGroup(firstGroup(LG));
             firstGroup(LG) = nextGroup(firstGroup(LG));
-            nextGroup(delGroup) = NULL;
+            nextGroup(firstGroup(LG)) = NULL;
         } else if (nextGroup(delGroup) == firstGroup(LG)) { // jika delGroup ada di akhir list Group
             adrGroup lastGroup = firstGroup(LG);
             while (nextGroup(lastGroup) != delGroup) {
@@ -96,8 +78,6 @@ void deleteGroup(listGroup &LG, adrGroup &delGroup, string namaGroup) {
             nextGroup(prevDel) = nextGroup(delGroup);
             nextGroup(delGroup) = NULL;
         }
-    } else {
-        cout << "Group doesn't exist" << endl;
     }
 }
 
@@ -178,31 +158,16 @@ void insertLast_User(listUser &LU, adrUser pUser){
         nextUser(Q) = pUser;
         nextUser(pUser) = firstUser(LU);
     }
-};
+}
 
-adrUser searchData_User(listUser LU,string username ){
-    bool found =false;
-    adrUser Q;
+adrUser searchData_User(listUser LU,string noTelepon){
+    adrUser pUser = firstUser(LU);
+    while (pUser != NULL && infoUser(pUser).noTelepon != noTelepon) {
+        pUser = nextUser(pUser);
+    }
 
-    Q = firstUser(LU);
-    while (nextUser(Q)!= firstUser(LU) && !found) {
-        if (username == infoUser(Q).nama) {
-            found = true;
-        } else {
-            Q= nextUser(Q);
-        }
-    }
-    if (nextUser(Q)== firstUser(LU)) {
-        if (username == infoUser(Q).nama) {
-            found = true;
-        } 
-    }
-    if (found) {
-        return Q;
-    } else {
-        return NULL;
-    }
-};
+    return pUser;
+}
 
 void showAlldata_User(listUser LU) {
     if (firstUser(LU) == NULL) {
