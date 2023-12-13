@@ -1,9 +1,5 @@
 #include "whatsApp.h"
 
-void menu() {
-    cout << "heloobitch" << endl;
-}
-
 void createListUser(listUser &LU) {
     firstUser(LU) = NULL;
 }
@@ -57,7 +53,6 @@ void showAlldata_Group(listGroup LG) {
     if (firstGroup(LG) == NULL) {
         cout << "Group isn't created yet";
     } else {
-        cout << "HALO";
         adrGroup Q;
         Q = firstGroup(LG);
         while (nextGroup(Q) != firstGroup(LG)) {
@@ -149,15 +144,15 @@ adrGroup searchData_Group(listGroup LG, string namaGroup) {
     bool found =false;
     adrGroup Q;
 
-    Q = firstGroup(Q);
-    while (nextGroup(Q)!= firstGroup(Q) && !found) {
+    Q = firstGroup(LG);
+    while (nextGroup(Q)!= firstGroup(LG) && !found) {
         if (namaGroup == infoGroup(Q).groupName) {
             found = true;
         } else {
             Q= nextGroup(Q);
         }
     }
-    if (nextGroup(Q)== firstGroup(Q)) {
+    if (nextGroup(Q)== firstGroup(LG)) {
         if (namaGroup == infoGroup(Q).groupName) {
             found = true;
         } 
@@ -168,5 +163,6 @@ adrGroup searchData_Group(listGroup LG, string namaGroup) {
         return NULL;
     }
 }
+
 adrUser searchData_User(listUser LU);
 

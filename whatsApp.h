@@ -10,7 +10,7 @@ using namespace std;
 #define nextGroup(P) P->nextGroup
 #define firstRel(P) P->firstRel
 #define firstUser(L) L.firstUser
-#define firstGroup(L) LG.firstGroup
+#define firstGroup(L) L.firstGroup
 
 struct infotypeUser {
     string nama;
