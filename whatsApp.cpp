@@ -164,5 +164,60 @@ adrGroup searchData_Group(listGroup LG, string namaGroup) {
     }
 }
 
-adrUser searchData_User(listUser LU);
+
+void insertLast_User(listUser &LU, adrUser pUser){
+    if (firstUser(LU) == NULL) {
+        firstUser(LU) = pUser;
+        nextUser(pUser) = firstUser(LU); 
+    }else {
+        adrUser Q;
+        Q = firstUser(LU);
+        while (nextUser(Q) != firstUser(LU)) {
+            Q = nextUser(Q);
+        }
+        nextUser(Q) = pUser;
+        nextUser(pUser) = firstUser(LU);
+    }
+};
+
+adrUser searchData_User(listUser LU,string username ){
+    bool found =false;
+    adrUser Q;
+
+    Q = firstUser(LU);
+    while (nextUser(Q)!= firstUser(LU) && !found) {
+        if (username == infoUser(Q).nama) {
+            found = true;
+        } else {
+            Q= nextUser(Q);
+        }
+    }
+    if (nextUser(Q)== firstUser(LU)) {
+        if (username == infoUser(Q).nama) {
+            found = true;
+        } 
+    }
+    if (found) {
+        return Q;
+    } else {
+        return NULL;
+    }
+};
+
+void showAlldata_User(listUser LU) {
+    if (firstUser(LU) == NULL) {
+        cout << "User isn't created yet";
+    } else {
+        adrUser Q;
+        Q = firstUser(LU);
+        while (nextUser(Q) != firstUser(LU)) {
+            cout << "Username : " << infoUser(Q).nama << endl;
+            cout << "No Phone : " << infoUser(Q).noTelepon << endl;
+            cout << endl;
+            Q = nextUser(Q);
+        }
+        cout << "User Name : " << infoUser(Q).nama << endl;
+        cout << "No Phone : " << infoUser(Q).noTelepon << endl;
+    }
+}
 

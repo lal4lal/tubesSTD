@@ -47,6 +47,7 @@ struct listGroup {
     adrGroup firstGroup;
 };
 
+
 void createListUser(listUser &LU);
 void createListGroup(listGroup &LG);
 adrUser createElmUser(infotypeUser x);
@@ -67,5 +68,11 @@ void deleteGroup_rel(listGroup &LG, listUser &LU, string namaGroup , adrGroup &d
 
 // 4. Mencari data grup (5) & Mencari data user (5) 
 adrGroup searchData_Group(listGroup LG,string namaGroup);
+
+
+// 6.	Menambahkan data user (5) 
+void insertLast_User(listUser &LU, adrUser pUser);
+
+// 5. mencari data user 
 adrUser searchData_User(listUser LU);
 #endif /*WHATSAPP_H_INCLUDED*/
