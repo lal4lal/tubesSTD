@@ -68,5 +68,4 @@ void deleteGroup_rel(listGroup &LG, listUser &LU, string namaGroup , adrGroup &d
 // 4. Mencari data grup (5) & Mencari data user (5) 
 adrGroup searchData_Group(listGroup LG,string namaGroup);
 adrUser searchData_User(listUser LU);
-void menu();
 #endif /*WHATSAPP_H_INCLUDED*/
