@@ -38,6 +38,8 @@ int main() {
             addUsers(LU, backToMenu);
         } else if (option == 7) {
             joinGroup_menu(LU,LG, backToMenu);
+        } else if (option == 8) {
+            showGroupMember(LG, LU, backToMenu);
         }
         if (backToMenu == "Y") {
             menu();

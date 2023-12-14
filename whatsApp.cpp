@@ -214,8 +214,6 @@ void joinGroup(listUser &LU, listGroup &LG, string noTelp, string namaGroup) {
         nextRel(Q) = rel;
    }
    infoGroup(pGroup).numOfMember++;
-   cout << infoUser(pUser).nama << " Joined " << infoGroup(pGroup).groupName << "." << endl;
-
    cout << endl;
 }
 
