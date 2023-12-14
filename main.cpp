@@ -40,6 +40,8 @@ int main() {
             joinGroup_menu(LU,LG, backToMenu);
         } else if (option == 8) {
             showGroupMember(LG, LU, backToMenu);
+        } else if (option == 9) {
+            searchUserinGroup(LG, LU, backToMenu);
         }
         if (backToMenu == "Y") {
             menu();
