@@ -25,6 +25,7 @@ struct infotypeGroup {
 typedef struct elmUser *adrUser;
 typedef struct elmRel *adrRel;
 typedef struct elmGroup *adrGroup;
+
 struct elmUser {
     infotypeUser infoUser;
     adrUser nextUser;
@@ -87,4 +88,8 @@ void addUsers(listUser &LU);
 // 7.	Menghubungkan data grup ke data user (5)
 void joinGroup_menu(listUser &LU, listGroup &LG);
 void joinGroup(listUser &LU, listGroup &LG, string noTelp, string namaGroup);
+
+// 8.
+void showAlldata_GroupMenu(listGroup LG,listUser LU);
+void showAlldata_Group(listGroup LG,listUser LU);
 #endif /*WHATSAPP_H_INCLUDED*/

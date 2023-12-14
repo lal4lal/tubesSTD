@@ -230,7 +230,13 @@ void joinGroup_menu(listUser &LU, listGroup &LG) {
 };
 
 
-// 8.	Menampilkan seluruh data grup beserta usernya (15) NOT YET
+// 8.	Menampilkan seluruh data grup beserta usernya (15) DONE
+void showAlldata_GroupMenu(listGroup LG, listUser LU) {
+    cout << "*==================================================*" << endl;
+    cout << "|               Show All Group Data                |" << endl;
+    cout << "*==================================================*" << endl;
+    showAlldata_Group(LG,LU);
+};
 // 9.	Mencari data user pada grup tertentu (10) NOT YET
 // 10.	Menghapus data user pada grup tertentu beserta relasinya (15) NOT YET
 // 11.	Menampilkan data grup yang jumlah usernya di bawah 5 orang (5) NOT YET

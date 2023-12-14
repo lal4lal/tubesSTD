@@ -27,8 +27,7 @@ int main() {
         } else if (option == 2) {
             showAlldata_Group(LG);
         } else if (option == 3) {
-            //hapusGrup(LU, LG);
-            cout << "test";
+            hapusGrup(LU, LG);
         } else if (option == 4) {
             cariDataGrup(LG);
         } else if (option == 5) {
@@ -37,6 +36,8 @@ int main() {
             addUsers(LU);
         } else if (option == 7) {
             joinGroup_menu(LU,LG);
+        } else if (option == 8) {
+            showAlldata_GroupMenu(LG,LU);
         }
         menu();
         takeOption(option);

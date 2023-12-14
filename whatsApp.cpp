@@ -191,8 +191,6 @@ adrRel createElmRel(adrGroup pGroup) {
     return pRel;
 }
 
-
-
 void joinGroup(listUser &LU, listGroup &LG, string noTelp, string namaGroup) {
    adrUser pUser = searchData_User(LU,noTelp);
    adrGroup pGroup = searchData_Group(LG,namaGroup);
@@ -214,4 +212,39 @@ void joinGroup(listUser &LU, listGroup &LG, string noTelp, string namaGroup) {
 
    cout << endl;
 }
+
+void showAlldata_Group(listGroup LG, listUser LU) {
+    if (firstGroup(LG) == NULL) {
+        cout << "Group Isn't created yet";
+    } else {
+        adrGroup check;
+        check = firstGroup(LG);
+        while (nextGroup(check) != firstGroup(LG)) {
+            cout << "Group Name : " << infoGroup(check).groupName << endl;
+            cout << "Total Participant : " << infoGroup(check).numOfMember << endl;
+            cout << "List participant :" << endl;
+            int i = 1;
+            adrUser lastUser = firstUser(LU);
+            while ( lastUser != NULL ) {
+                bool foundRel = false;
+                adrRel checkRel = firstRel(lastUser);
+                while(checkRel != NULL && !foundRel) {
+                    if (nextGroup(checkRel) == check ) {
+                       foundRel = true;
+                    }
+                    checkRel = nextRel(checkRel);
+                }
+                if (foundRel) {
+                    cout << i << ". " << infoUser(lastUser).nama << endl;
+                    i++;
+                }else {
+                    lastUser = nextUser(lastUser);
+                }
+            }
+            cout << endl;
+            check = nextGroup(check);
+        }
+    }
+}
+
 
