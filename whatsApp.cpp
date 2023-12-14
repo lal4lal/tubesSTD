@@ -75,21 +75,17 @@ void deleteGroup(listGroup &LG, adrGroup &delGroup, string namaGroup) {
 
 void deleteRel(listUser &LU, adrRel precDel, adrRel &delRel, adrUser pUser) {
     if (firstRel(pUser) == precDel && nextRel(firstRel(pUser)) == NULL) { // jika prec ada di first dan hanya ada 1 elemen di list Rel
-        cout << "keluar di awal 1" << endl;
         firstRel(pUser) = NULL;
     } else if (firstRel(pUser) == precDel && nextRel(firstRel(pUser)) != NULL) { // jika prec ada di first dan ada lebih dari 1 elemen di list Rel
-        cout << "keluar di awal banyak" << endl;
         firstRel(pUser) = nextRel(firstRel(pUser));
         nextRel(precDel) = NULL;
     } else if (nextRel(precDel) == NULL) {
-        cout << "Keluar di akhir" << endl;
         adrRel pRel = firstRel(pUser);
         while (nextRel(pRel) != precDel) {
             pRel = nextRel(pRel);
         }
         nextRel(pRel) = NULL;
     } else { // jika prec ada di tengah tengah list Rel
-        cout << "keluar di tengah" << endl;
         adrRel pRel = firstRel(pUser);
         while (nextRel(pRel) != precDel) {
             pRel = nextRel(pRel);
@@ -107,7 +103,6 @@ void deleteGroup_rel(listGroup &LG, listUser &LU, string namaGroup , adrGroup &d
     adrRel delRel, pRel;
     bool found;
     while (pUser != NULL) {
-        cout << infoUser(pUser).nama << endl;
         pRel = firstRel(pUser);
         found = false;
         while (pRel != NULL && !found) {
@@ -118,7 +113,6 @@ void deleteGroup_rel(listGroup &LG, listUser &LU, string namaGroup , adrGroup &d
             }
         }
         if (found && pRel != NULL) {
-            cout << infoGroup(nextGroup(pRel)).groupName << endl;
             deleteRel(LU, pRel, delRel, pUser);
         }
         pUser = nextUser(pUser);
