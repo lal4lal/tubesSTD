@@ -82,6 +82,7 @@ void hapusGrup(listUser &LU, listGroup &LG, string &option);
 void addGroups(listGroup &LG, string &option);
 void cariDataGrup(listGroup LG, string &option);
 void cariDataUser(listUser LU, string &option);
+void showGroupMember(listGroup LG, listUser LU, string &option);
 
 // 7.	Menghubungkan data grup ke data user (5)
 void joinGroup_menu(listUser &LU, listGroup &LG, string &option);
