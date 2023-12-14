@@ -14,6 +14,7 @@ int main() {
     string noTelp,namaGroup;
 
     int option;
+    string backToMenu;
 
     // HARDCODED GROUP //
     createListGroup(LG);
@@ -24,22 +25,26 @@ int main() {
     takeOption(option);
     while (option != 0) {
         if (option == 1) {
-            addGroups(LG);
+            addGroups(LG, backToMenu);
         } else if (option == 2) {
-            showAlldata_Group(LG);
+            showAlldata_Group(LG, backToMenu);
         } else if (option == 3) {
-            hapusGrup(LU, LG);
+            hapusGrup(LU, LG, backToMenu);
         } else if (option == 4) {
-            cariDataGrup(LG);
+            cariDataGrup(LG, backToMenu);
         } else if (option == 5) {
-            cariDataUser(LU);
+            cariDataUser(LU, backToMenu);
         } else if (option == 6) {
-            addUsers(LU);
+            addUsers(LU, backToMenu);
         } else if (option == 7) {
-            joinGroup_menu(LU,LG);
+            joinGroup_menu(LU,LG, backToMenu);
         }
-        menu();
-        takeOption(option);
+        if (backToMenu == "Y") {
+            menu();
+            takeOption(option);
+        } else {
+            option = 0;
+        } 
     }
 
     return 0;

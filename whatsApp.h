@@ -59,7 +59,7 @@ adrRel createElmRel(adrGroup pGroup);
 void insertLast_Group(listGroup &LG, adrGroup pGroup);
 
 // 2.Show all data grup (5)
-void showAlldata_Group(listGroup LG);
+void showAlldata_Group(listGroup LG, string &option);
 
 // 3.	Menghapus data grup beserta relasinya (15)
 void deleteGroup(listGroup &LG, adrGroup &delGroup, string namaGroup);
@@ -77,15 +77,14 @@ adrUser searchData_User(listUser LU, string noTelepon);
 void showAlldata_User(listUser LU);
 void takeOption(int &option);
 void menu();
-void addUsers(listUser &LU);
-void hapusGrup(listUser &LU, listGroup &LG);
-void addGroups(listGroup &LG);
-void cariDataGrup(listGroup LG);
-void cariDataUser(listUser LU);
-void addUsers(listUser &LU);
+void addUsers(listUser &LU, string &option);
+void hapusGrup(listUser &LU, listGroup &LG, string &option);
+void addGroups(listGroup &LG, string &option);
+void cariDataGrup(listGroup LG, string &option);
+void cariDataUser(listUser LU, string &option);
 
 // 7.	Menghubungkan data grup ke data user (5)
-void joinGroup_menu(listUser &LU, listGroup &LG);
+void joinGroup_menu(listUser &LU, listGroup &LG, string &option);
 void joinGroup(listUser &LU, listGroup &LG, string noTelp, string namaGroup);
 void load_dataset(listUser &LU, listGroup &LG);
 #endif /*WHATSAPP_H_INCLUDED*/
