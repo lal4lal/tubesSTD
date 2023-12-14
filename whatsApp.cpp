@@ -1,4 +1,4 @@
-#include "whatsapp.h"
+#include "whatsApp.h"
 
 void createListUser(listUser &LU) {
     firstUser(LU) = NULL;
@@ -73,27 +73,24 @@ void deleteGroup(listGroup &LG, adrGroup &delGroup, string namaGroup) {
     }
 }
 
-void deleteRel(listUser &LU, adrRel prec, adrRel &delRel, adrUser pUser) {
-    if (prec == firstRel(pUser) && nextRel(prec) == NULL) { // jika prec ada di first dan hanya ada 1 elemen di list Rel
+void deleteRel(listUser &LU, adrRel precDel, adrRel &delRel, adrUser pUser) {
+    if (firstRel(pUser) == precDel && nextRel(firstRel(pUser)) == NULL) { // jika prec ada di first dan hanya ada 1 elemen di list Rel
+        cout << "keluar di awal 1" << endl;
         firstRel(pUser) = NULL;
-    } else if (prec == firstRel(pUser) && nextRel(prec) != NULL) { // jika prec ada di first dan ada lebih dari 1 elemen di list Rel
-        firstRel(pUser) = nextRel(prec);
-        nextRel(prec) = NULL;
-    } else if (nextRel(prec) == NULL) { // jika prec ada di akhir list Rel
-        adrRel pRel = firstRel(pUser);
-        while (nextRel(pRel) != prec) {
-            pRel = nextRel(pRel);
-        }
-        nextRel(pRel) = NULL;
+    } else if (firstRel(pUser) == precDel && nextRel(firstRel(pUser)) != NULL) { // jika prec ada di first dan ada lebih dari 1 elemen di list Rel
+        cout << "keluar di awal banyak" << endl;
+        firstRel(pUser) = nextRel(firstRel(pUser));
+        nextRel(precDel) = NULL;
     } else { // jika prec ada di tengah tengah list Rel
+        cout << "keluar di tengah" << endl;
         adrRel pRel = firstRel(pUser);
-        while (nextRel(pRel) != prec) {
+        while (nextRel(pRel) != precDel) {
             pRel = nextRel(pRel);
         }
-        nextRel(pRel) = nextRel(prec);
-        nextRel(prec) = NULL;
+        nextRel(pRel) = nextRel(precDel);
+        nextRel(precDel) = NULL;
     }
-    delRel = prec;
+    delRel = precDel;
 }
 
 
@@ -248,3 +245,54 @@ void showAlldata_Group(listGroup LG, listUser LU) {
 }
 
 
+void load_dataset(listUser &LU, listGroup &LG) {
+    infotypeUser user;
+    infotypeGroup grup;
+    adrUser pUser;
+    adrGroup pGroup;
+
+    user.nama = "Hilal";
+    user.noTelepon = "0";
+    pUser = createElmUser(user);
+    insertLast_User(LU, pUser);
+
+    user.nama = "Dito";
+    user.noTelepon = "1";
+    pUser = createElmUser(user);
+    insertLast_User(LU, pUser);
+
+    user.nama = "Imam";
+    user.noTelepon = "2";
+    pUser = createElmUser(user);
+    insertLast_User(LU, pUser);
+
+    user.nama = "Fariz";
+    user.noTelepon = "3";
+    pUser = createElmUser(user);
+    insertLast_User(LU, pUser);
+
+    grup.groupName = "sobatHacker";
+    grup.numOfMember = 0;
+    pGroup = createElmGroup(grup);
+    insertLast_Group(LG, pGroup);
+
+    grup.groupName = "RPLa";
+    grup.numOfMember = 0;
+    pGroup = createElmGroup(grup);
+    insertLast_Group(LG, pGroup);
+
+    grup.groupName = "tanpaImam";
+    grup.numOfMember = 0;
+    pGroup = createElmGroup(grup);
+    insertLast_Group(LG, pGroup);
+
+    joinGroup(LU, LG, "0", "RPLa");
+    joinGroup(LU, LG, "0", "sobatHacker");
+
+    joinGroup(LU, LG, "1", "sobatHacker");
+    joinGroup(LU, LG, "1", "RPLa");
+    joinGroup(LU, LG, "1", "tanpaImam");
+
+    joinGroup(LU, LG, "3", "tanpaImam");
+    joinGroup(LU, LG, "3", "RPLa");
+}
