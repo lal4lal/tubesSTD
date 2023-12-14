@@ -75,14 +75,17 @@ void deleteGroup(listGroup &LG, adrGroup &delGroup, string namaGroup) {
 
 void deleteRel(listUser &LU, adrRel precDel, adrRel &delRel, adrUser pUser) {
     if (firstRel(pUser) == precDel && nextRel(firstRel(pUser)) == NULL) { // jika prec ada di first dan hanya ada 1 elemen di list Rel
-        cout << "keluar di awal 1" << endl;
         firstRel(pUser) = NULL;
     } else if (firstRel(pUser) == precDel && nextRel(firstRel(pUser)) != NULL) { // jika prec ada di first dan ada lebih dari 1 elemen di list Rel
-        cout << "keluar di awal banyak" << endl;
         firstRel(pUser) = nextRel(firstRel(pUser));
         nextRel(precDel) = NULL;
+    } else if (nextRel(precDel) == NULL) {
+        adrRel pRel = firstRel(pUser);
+        while (nextRel(pRel) != precDel) {
+            pRel = nextRel(pRel);
+        }
+        nextRel(pRel) = NULL;
     } else { // jika prec ada di tengah tengah list Rel
-        cout << "keluar di tengah" << endl;
         adrRel pRel = firstRel(pUser);
         while (nextRel(pRel) != precDel) {
             pRel = nextRel(pRel);
@@ -97,15 +100,22 @@ void deleteRel(listUser &LU, adrRel precDel, adrRel &delRel, adrUser pUser) {
 
 void deleteGroup_rel(listGroup &LG, listUser &LU, string namaGroup , adrGroup &delGroup) {
     adrUser pUser = firstUser(LU);
-    adrRel delRel = NULL;
+    adrRel delRel, pRel;
+    bool found;
     while (pUser != NULL) {
-        adrRel pRel = firstRel(pUser);
-        while (pRel != NULL) {
-            if (infoGroup(nextGroup(pRel)).groupName == namaGroup) { // cek jika relasi terhubung ke namaGroup
-                deleteRel(LU, pRel, delRel, pUser);
+        pRel = firstRel(pUser);
+        found = false;
+        while (pRel != NULL && !found) {
+            if (infoGroup(nextGroup(pRel)).groupName == namaGroup) {
+                found = true;
+            } else {
+                pRel = nextRel(pRel);
             }
-            pRel = nextRel(pRel);
         }
+        if (found && pRel != NULL) {
+            deleteRel(LU, pRel, delRel, pUser);
+        }
+        pUser = nextUser(pUser);
     }
     deleteGroup(LG, delGroup, namaGroup);
 }
@@ -140,15 +150,14 @@ adrGroup searchData_Group(listGroup LG, string namaGroup) {
 void insertLast_User(listUser &LU, adrUser pUser){
     if (firstUser(LU) == NULL) {
         firstUser(LU) = pUser;
-        nextUser(pUser) = firstUser(LU);
+        nextUser(pUser) = NULL;
     }else {
         adrUser Q;
         Q = firstUser(LU);
-        while (nextUser(Q) != firstUser(LU)) {
+        while (nextUser(Q) != NULL) {
             Q = nextUser(Q);
         }
         nextUser(Q) = pUser;
-        nextUser(pUser) = firstUser(LU);
     }
 }
 
@@ -167,7 +176,7 @@ void showAlldata_User(listUser LU) {
     } else {
         adrUser Q;
         Q = firstUser(LU);
-        while (nextUser(Q) != firstUser(LU)) {
+        while (Q != NULL) {
             cout << "Username : " << infoUser(Q).nama << endl;
             cout << "No Phone : " << infoUser(Q).noTelepon << endl;
             cout << endl;
