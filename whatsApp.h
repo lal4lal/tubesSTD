@@ -66,13 +66,13 @@ void deleteGroup(listGroup &LG, adrGroup &delGroup, string namaGroup);
 void deleteRel(listUser &LU, adrRel prec, adrRel &delRel, adrUser pUser);
 void deleteGroup_rel(listGroup &LG, listUser &LU, string namaGroup , adrGroup &delGroup);
 
-// 4. Mencari data grup (5) & Mencari data user (5) 
+// 4. Mencari data grup (5) & Mencari data user (5)
 adrGroup searchData_Group(listGroup LG,string namaGroup);
 
-// 6.	Menambahkan data user (5) 
+// 6.	Menambahkan data user (5)
 void insertLast_User(listUser &LU, adrUser pUser);
 
-// 5. mencari data user 
+// 5. mencari data user
 adrUser searchData_User(listUser LU, string noTelepon);
 void showAlldata_User(listUser LU);
 void takeOption(int &option);
@@ -83,4 +83,8 @@ void addGroups(listGroup &LG);
 void cariDataGrup(listGroup LG);
 void cariDataUser(listUser LU);
 void addUsers(listUser &LU);
+
+// 7.	Menghubungkan data grup ke data user (5)
+void joinGroup_menu(listUser &LU, listGroup &LG);
+void joinGroup(listUser &LU, listGroup &LG, string noTelp, string namaGroup);
 #endif /*WHATSAPP_H_INCLUDED*/

@@ -1,4 +1,4 @@
-#include "whatsApp.h"
+#include "whatsapp.h"
 
 void menu() {
     cout << "*==================================================*" << endl;
@@ -130,6 +130,7 @@ void hapusGrup(listUser &LU, listGroup &LG) {
     }
 }
 
+
 // 4.	Mencari data grup (5) DONE
 void cariDataGrup(listGroup LG) {
     string namaGroup;
@@ -209,6 +210,24 @@ void addUsers(listUser &LU) {
 }
 
 // 7.	Menghubungkan data grup ke data user (5) NOT YET
+void joinGroup_menu(listUser &LU, listGroup &LG) {
+    string noTelepon, namaGroup;
+    cout << "*==================================================*" << endl;
+    cout << "|                     Search User                  |" << endl;
+    cout << "*==================================================*" << endl;
+    cout << "  Masukkan No Telepon User yang ingin dicari: ";
+    cin >> noTelepon;
+    cout << endl;
+
+    cout << "*==================================================*" << endl;
+    cout << "|                    Search Group                  |" << endl;
+    cout << "*==================================================*" << endl;
+    cout << "  Masukkan Nama Group yang ingin dicari: ";
+    cin >> namaGroup;
+    cout << endl;
+
+    joinGroup(LU,LG,noTelepon,namaGroup);
+};
 
 
 // 8.	Menampilkan seluruh data grup beserta usernya (15) NOT YET

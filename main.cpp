@@ -1,8 +1,8 @@
-#include "whatsApp.h"
+#include "whatsapp.h"
 #include <iostream>
 using namespace std;
 
-int main() { 
+int main() {
     listGroup LG;
     adrGroup group;
     infotypeGroup x;
@@ -11,12 +11,14 @@ int main() {
     adrUser user;
     infotypeUser y;
 
+    string noTelp,namaGroup;
+
     int option;
 
     // HARDCODED GROUP //
     createListGroup(LG);
     createListUser(LU);
-    
+
     menu();
     takeOption(option);
     while (option != 0) {
@@ -25,13 +27,16 @@ int main() {
         } else if (option == 2) {
             showAlldata_Group(LG);
         } else if (option == 3) {
-            hapusGrup(LU, LG);
+            //hapusGrup(LU, LG);
+            cout << "test";
         } else if (option == 4) {
             cariDataGrup(LG);
         } else if (option == 5) {
             cariDataUser(LU);
         } else if (option == 6) {
             addUsers(LU);
+        } else if (option == 7) {
+            joinGroup_menu(LU,LG);
         }
         menu();
         takeOption(option);
