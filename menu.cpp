@@ -59,7 +59,7 @@ void takeOption(int &option) {
     }
 }
 // 1. Insert data grup dari belakang (5)
-void addGroups(listGroup &LG) {
+void addGroups(listGroup &LG, string &option) {
     infotypeGroup grup;
     adrGroup pGroup;
     cout << "*==================================================*" << endl;
@@ -75,10 +75,16 @@ void addGroups(listGroup &LG) {
     cout << "|                  Input Data Sukses               |" << endl;
     cout << "*==================================================*" << endl;
     cout << endl;
+
+    cout << "*==================================================*" << endl;
+    cout << "  Kembali ke Menu ketik (Y/N): ";
+    cin >> option;
+    cout << "*==================================================*" << endl;
+    cout << endl;
 }
 
 // 2.Show all data grup (5)
-void showAlldata_Group(listGroup LG) {
+void showAlldata_Group(listGroup LG, string &option) {
     cout << "*==================================================*" << endl;
     cout << "|                     Daftar Grup                  |" << endl;
     cout << "*==================================================*" << endl;
@@ -92,21 +98,24 @@ void showAlldata_Group(listGroup LG) {
         adrGroup Q;
         Q = firstGroup(LG);
         cout << "*==================================================*" << endl;
-        while (nextGroup(Q) != firstGroup(LG)) {
+        do {
             cout << "  Group Name : " << infoGroup(Q).groupName << endl;
             cout << "  Member : " << infoGroup(Q).numOfMember << endl;
             cout << endl;
             Q = nextGroup(Q);
-        }
-        cout << "  Group Name : " << infoGroup(Q).groupName << endl;
-        cout << "  Member : " << infoGroup(Q).numOfMember << endl;
+        } while (nextGroup(Q) != nextGroup(firstGroup(LG)));
         cout << "*==================================================*" << endl;
         cout << endl;
     }
+    cout << "*==================================================*" << endl;
+    cout << "  Kembali ke Menu ketik (Y/N): ";
+    cin >> option;
+    cout << "*==================================================*" << endl;
+    cout << endl;
 }
 
 // 3.	Menghapus data grup beserta relasinya (15) PROGRESS
-void hapusGrup(listUser &LU, listGroup &LG) {
+void hapusGrup(listUser &LU, listGroup &LG, string &option) {
     string namaGroup;
     adrGroup delGroup;
     cout << "*==================================================*" << endl;
@@ -128,11 +137,16 @@ void hapusGrup(listUser &LU, listGroup &LG) {
         cout << "*==================================================*" << endl;
         cout << endl;
     }
+    cout << "*==================================================*" << endl;
+    cout << "  Kembali ke Menu ketik (Y/N): ";
+    cin >> option;
+    cout << "*==================================================*" << endl;
+    cout << endl;
 }
 
 
 // 4.	Mencari data grup (5) DONE
-void cariDataGrup(listGroup LG) {
+void cariDataGrup(listGroup LG, string &option) {
     string namaGroup;
     adrGroup pGroup;
     cout << "*==================================================*" << endl;
@@ -158,10 +172,15 @@ void cariDataGrup(listGroup LG) {
         cout << "*==================================================*" << endl;
         cout << endl;
     }
+    cout << "*==================================================*" << endl;
+    cout << "  Kembali ke Menu ketik (Y/N): ";
+    cin >> option;
+    cout << "*==================================================*" << endl;
+    cout << endl;
 }
 
 // 5.	Mencari data user (5) NOT YET
-void cariDataUser(listUser LU) {
+void cariDataUser(listUser LU, string &option) {
     string noTelepon;
     adrUser pUser;
     cout << "*==================================================*" << endl;
@@ -187,10 +206,15 @@ void cariDataUser(listUser LU) {
         cout << "*==================================================*" << endl;
         cout << endl;
     }
+    cout << "*==================================================*" << endl;
+    cout << "  Kembali ke Menu ketik (Y/N): ";
+    cin >> option;
+    cout << "*==================================================*" << endl;
+    cout << endl;
 }
 
 // 6.	Menambahkan data user (5) NOT YET
-void addUsers(listUser &LU) {
+void addUsers(listUser &LU, string &option) {
     infotypeUser user;
     adrUser pUser;
     cout << "*==================================================*" << endl;
@@ -207,10 +231,16 @@ void addUsers(listUser &LU) {
     cout << "|                  Input Data Sukses               |" << endl;
     cout << "*==================================================*" << endl;
     cout << endl;
+
+    cout << "*==================================================*" << endl;
+    cout << "  Kembali ke Menu ketik (Y/N): ";
+    cin >> option;
+    cout << "*==================================================*" << endl;
+    cout << endl;
 }
 
 // 7.	Menghubungkan data grup ke data user (5) NOT YET
-void joinGroup_menu(listUser &LU, listGroup &LG) {
+void joinGroup_menu(listUser &LU, listGroup &LG, string &option) {
     string noTelepon, namaGroup;
     cout << "*==================================================*" << endl;
     cout << "|                     Search User                  |" << endl;
@@ -227,6 +257,12 @@ void joinGroup_menu(listUser &LU, listGroup &LG) {
     cout << endl;
 
     joinGroup(LU,LG,noTelepon,namaGroup);
+
+    cout << "*==================================================*" << endl;
+    cout << "  Kembali ke Menu ketik (Y/N): ";
+    cin >> option;
+    cout << "*==================================================*" << endl;
+    cout << endl;
 };
 
 
