@@ -243,20 +243,19 @@ void addUsers(listUser &LU, string &option) {
 void joinGroup_menu(listUser &LU, listGroup &LG, string &option) {
     string noTelepon, namaGroup;
     cout << "*==================================================*" << endl;
-    cout << "|                     Search User                  |" << endl;
+    cout << "|                     Join Group                   |" << endl;
     cout << "*==================================================*" << endl;
-    cout << "  Masukkan No Telepon User yang ingin dicari: ";
+    cout << "  Masukkan No Telepon Anda: ";
     cin >> noTelepon;
-    cout << endl;
-
-    cout << "*==================================================*" << endl;
-    cout << "|                    Search Group                  |" << endl;
-    cout << "*==================================================*" << endl;
-    cout << "  Masukkan Nama Group yang ingin dicari: ";
+    cout << "  Masukkan Nama Group yang Anda ingin bergabung: ";
     cin >> namaGroup;
     cout << endl;
 
     joinGroup(LU,LG,noTelepon,namaGroup);
+    cout << "*==================================================*" << endl;
+    cout << "  " << noTelepon << " Joined " << namaGroup << "." << endl;
+    cout << "*==================================================*" << endl;
+    cout << endl;
 
     cout << "*==================================================*" << endl;
     cout << "  Kembali ke Menu ketik (Y/N): ";
@@ -266,6 +265,7 @@ void joinGroup_menu(listUser &LU, listGroup &LG, string &option) {
 };
 
 
+<<<<<<< HEAD
 // 8.	Menampilkan seluruh data grup beserta usernya (15) DONE
 void showAlldata_GroupMenu(listGroup LG, listUser LU) {
     cout << "*==================================================*" << endl;
@@ -273,7 +273,130 @@ void showAlldata_GroupMenu(listGroup LG, listUser LU) {
     cout << "*==================================================*" << endl;
     showAlldata_Group(LG,LU);
 };
+=======
+// 8.	Menampilkan seluruh data grup beserta usernya (15) NOT YET
+void showGroupMember(listGroup LG, listUser LU, string &option) {
+    cout << "*==================================================*" << endl;
+    cout << "|                Show Group and Member             |" << endl;
+    cout << "*==================================================*" << endl;
+    cout << endl;
+    adrUser pUser;
+    adrGroup pGroup = firstGroup(LG);
+    adrRel pRel;
+
+    if (pGroup == NULL) {
+        cout << "*==================================================*" << endl;
+        cout << "|               Group Not Created Yet              |" << endl;
+        cout << "|          Make Sure To create Group First         |" << endl;
+        cout << "*==================================================*" << endl;
+        cout << endl;
+    } else {
+        do {
+            pUser = firstUser(LU);
+            int i = 1;
+            cout << "*==================================================*" << endl;
+            cout << "  " << infoGroup(pGroup).groupName << endl;
+            cout << "*==================================================*" << endl;
+            while (pUser != NULL) {
+                pRel = firstRel(pUser);
+                while (pRel != NULL) {
+                    if (infoGroup(nextGroup(pRel)).groupName == infoGroup(pGroup).groupName) {
+                        cout << "  " << i << ". " << infoUser(pUser).nama << " ( " << infoUser(pUser).noTelepon << " )" << endl;
+                        i++;
+                    }
+                    pRel = nextRel(pRel);
+                }
+                pUser = nextUser(pUser);
+            }
+            pGroup = nextGroup(pGroup);
+        } while (nextGroup(pGroup) != nextGroup(firstGroup(LG)));
+    }
+    cout << "*==================================================*" << endl;
+    cout << endl;
+    cout << "*==================================================*" << endl;
+    cout << "  Kembali ke Menu ketik (Y/N): ";
+    cin >> option;
+    cout << "*==================================================*" << endl;
+    cout << endl;
+}
+
+>>>>>>> 7fc474c53072a6b87d06155acd7585055a52fc1a
 // 9.	Mencari data user pada grup tertentu (10) NOT YET
+void searchUserinGroup(listGroup LG, listUser LU, string &option) {
+    string noTelepon, namaGroup;
+    cout << "*==================================================*" << endl;
+    cout << "|               Search Member In Group             |" << endl;
+    cout << "*==================================================*" << endl;
+    cout << "  Masukkan nomor telepon user yang dicari: ";
+    cin >> noTelepon;
+    cout << "  Masukkan nama group user berada: ";
+    cin >> namaGroup;
+    cout << endl;
+    adrUser pUser = searchData_User(LU, noTelepon);
+    adrRel pRel;
+    if (pUser != NULL) {
+        pRel = searchData_Rel(LU, LG, namaGroup, pUser);
+        if (pRel != NULL) {
+            cout << "*==================================================*" << endl;
+            cout << "  " << infoUser(pUser).nama << " (" << infoUser(pUser).noTelepon << ") tergabung di grup " << infoGroup(nextGroup(pRel)).groupName << endl;  
+            cout << "*==================================================*" << endl;
+            cout << endl;
+        } else {
+            cout << "*==================================================*" << endl;
+            cout << "  " << infoUser(pUser).nama << " (" << infoUser(pUser).noTelepon << ") Not Found " << endl;  
+            cout << "*==================================================*" << endl;
+            cout << endl;
+        }
+    } else {
+        cout << "*==================================================*" << endl;
+        cout << "|                 User Not Added Yet               |" << endl;
+        cout << "|           Make Sure To create User First         |" << endl;
+        cout << "*==================================================*" << endl;
+        cout << endl;
+    }
+    cout << "*==================================================*" << endl;
+    cout << "  Kembali ke Menu ketik (Y/N): ";
+    cin >> option;
+    cout << "*==================================================*" << endl;
+    cout << endl;
+}
+
 // 10.	Menghapus data user pada grup tertentu beserta relasinya (15) NOT YET
+void leftGroup(listUser &LU, listGroup &LG) {
+
+}
+
 // 11.	Menampilkan data grup yang jumlah usernya di bawah 5 orang (5) NOT YET
-// 12.	Main program (10) PROGRESS
+void showGroupMem5(listGroup LG, string &option) {
+    adrGroup pGroup = firstGroup(LG);
+    cout << "*==================================================*" << endl;
+    cout << "|                 Group Below 5 Member             |" << endl;
+    cout << "*==================================================*" << endl;
+    if (firstGroup(LG) == NULL) {
+        cout << "*==================================================*" << endl;
+        cout << "|                Group Not Created Yet             |" << endl;
+        cout << "*==================================================*" << endl;
+        cout << endl;
+    } else {
+        adrGroup Q;
+        Q = firstGroup(LG);
+        cout << "*==================================================*" << endl;
+        do {
+            if (infoGroup(pGroup).numOfMember < 5) {
+                cout << "  Group Name : " << infoGroup(Q).groupName << endl;
+                cout << "  Member : " << infoGroup(Q).numOfMember << endl;
+                cout << endl;
+            }
+            Q = nextGroup(Q);
+        } while (nextGroup(Q) != nextGroup(firstGroup(LG)));
+        cout << "*==================================================*" << endl;
+        cout << endl;
+    }
+    cout << "*==================================================*" << endl;
+    cout << "  Kembali ke Menu ketik (Y/N): ";
+    cin >> option;
+    cout << "*==================================================*" << endl;
+    cout << endl;
+}
+
+
