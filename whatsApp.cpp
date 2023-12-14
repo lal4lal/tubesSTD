@@ -53,8 +53,8 @@ void deleteGroup(listGroup &LG, adrGroup &delGroup, string namaGroup) {
                 lastGroup = nextGroup(lastGroup);
             }
             nextGroup(lastGroup) = nextGroup(firstGroup(LG));
-            firstGroup(LG) = nextGroup(firstGroup(LG));
-            nextGroup(firstGroup(LG)) = NULL;
+            firstGroup(LG) = nextGroup(lastGroup);
+            nextGroup(delGroup) = NULL;
         } else if (nextGroup(delGroup) == firstGroup(LG)) { // jika delGroup ada di akhir list Group
             adrGroup lastGroup = firstGroup(LG);
             while (nextGroup(lastGroup) != delGroup) {
