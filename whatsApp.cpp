@@ -170,6 +170,17 @@ adrUser searchData_User(listUser LU,string noTelepon){
     return pUser;
 }
 
+adrRel searchData_Rel(listUser LU, listGroup LG, string namaGroup, adrUser pUser) {
+    adrRel pRel;
+    if (pUser != NULL) {
+        pRel = firstRel(pUser);
+        while (pRel != NULL && infoGroup(nextGroup(pRel)).groupName != namaGroup) {
+            pRel = nextRel(pRel);
+        }
+    }
+    return pRel;
+}
+
 void showAlldata_User(listUser LU) {
     if (firstUser(LU) == NULL) {
         cout << "User isn't created yet";
@@ -214,8 +225,6 @@ void joinGroup(listUser &LU, listGroup &LG, string noTelp, string namaGroup) {
         nextRel(Q) = rel;
    }
    infoGroup(pGroup).numOfMember++;
-   cout << infoUser(pUser).nama << " Joined " << infoGroup(pGroup).groupName << "." << endl;
-
    cout << endl;
 }
 

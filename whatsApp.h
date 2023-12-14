@@ -83,12 +83,20 @@ void hapusGrup(listUser &LU, listGroup &LG, string &option);
 void addGroups(listGroup &LG, string &option);
 void cariDataGrup(listGroup LG, string &option);
 void cariDataUser(listUser LU, string &option);
+void showGroupMember(listGroup LG, listUser LU, string &option);
 
 // 7.	Menghubungkan data grup ke data user (5)
 void joinGroup_menu(listUser &LU, listGroup &LG, string &option);
 void joinGroup(listUser &LU, listGroup &LG, string noTelp, string namaGroup);
+<<<<<<< HEAD
 
 //8. 
 void showAlldata_Group(listGroup LG, listUser LU);
 void showAlldata_GroupMenu(listGroup LG, listUser LU);
+=======
+void load_dataset(listUser &LU, listGroup &LG);
+void searchUserinGroup(listGroup LG, listUser LU, string &option);
+adrRel searchData_Rel(listUser LU, listGroup LG, string namaGroup, adrUser pUser);
+void showGroupMem5(listGroup LG, string &option);
+>>>>>>> 7fc474c53072a6b87d06155acd7585055a52fc1a
 #endif /*WHATSAPP_H_INCLUDED*/
