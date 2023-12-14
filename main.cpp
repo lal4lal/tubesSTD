@@ -1,4 +1,4 @@
-#include "whatsapp.h"
+#include "whatsApp.h"
 #include <iostream>
 using namespace std;
 
@@ -19,6 +19,7 @@ int main() {
     createListGroup(LG);
     createListUser(LU);
 
+    load_dataset(LU, LG);
     menu();
     takeOption(option);
     while (option != 0) {
@@ -27,8 +28,7 @@ int main() {
         } else if (option == 2) {
             showAlldata_Group(LG);
         } else if (option == 3) {
-            //hapusGrup(LU, LG);
-            cout << "test";
+            hapusGrup(LU, LG);
         } else if (option == 4) {
             cariDataGrup(LG);
         } else if (option == 5) {
