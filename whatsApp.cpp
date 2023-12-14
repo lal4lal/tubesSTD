@@ -1,4 +1,4 @@
-#include "whatsApp.h"
+#include "whatsapp.h"
 
 void createListUser(listUser &LU) {
     firstUser(LU) = NULL;
@@ -25,18 +25,10 @@ adrGroup createElmGroup(infotypeGroup x) {
     return pGroup;
 }
 
-adrRel createElmRel(adrGroup pGroup) {
-    adrRel pRel = new elmRel;
-    nextGroup(pRel) = pGroup;
-    nextRel(pRel) = NULL;
-
-    return pRel;
-}
-
 void insertLast_Group(listGroup &LG, adrGroup pGroup){
     if (firstGroup(LG) == NULL) {
         firstGroup(LG) = pGroup;
-        nextGroup(pGroup) = firstGroup(LG); 
+        nextGroup(pGroup) = firstGroup(LG);
     }else {
         adrGroup Q;
         Q = firstGroup(LG);
@@ -104,6 +96,8 @@ void deleteRel(listUser &LU, adrRel prec, adrRel &delRel, adrUser pUser) {
     delRel = prec;
 }
 
+
+
 void deleteGroup_rel(listGroup &LG, listUser &LU, string namaGroup , adrGroup &delGroup) {
     adrUser pUser = firstUser(LU);
     adrRel delRel = NULL;
@@ -119,7 +113,8 @@ void deleteGroup_rel(listGroup &LG, listUser &LU, string namaGroup , adrGroup &d
     deleteGroup(LG, delGroup, namaGroup);
 }
 
-// 4. Mencari data grup (5) & Mencari data user (5) 
+
+// 4. Mencari data grup (5) & Mencari data user (5)
 adrGroup searchData_Group(listGroup LG, string namaGroup) {
     bool found =false;
     adrGroup Q;
@@ -135,7 +130,7 @@ adrGroup searchData_Group(listGroup LG, string namaGroup) {
     if (nextGroup(Q)== firstGroup(LG)) {
         if (namaGroup == infoGroup(Q).groupName) {
             found = true;
-        } 
+        }
     }
     if (found) {
         return Q;
@@ -148,7 +143,7 @@ adrGroup searchData_Group(listGroup LG, string namaGroup) {
 void insertLast_User(listUser &LU, adrUser pUser){
     if (firstUser(LU) == NULL) {
         firstUser(LU) = pUser;
-        nextUser(pUser) = firstUser(LU); 
+        nextUser(pUser) = firstUser(LU);
     }else {
         adrUser Q;
         Q = firstUser(LU);
@@ -184,5 +179,39 @@ void showAlldata_User(listUser LU) {
         cout << "User Name : " << infoUser(Q).nama << endl;
         cout << "No Phone : " << infoUser(Q).noTelepon << endl;
     }
+}
+
+// 7.
+
+adrRel createElmRel(adrGroup pGroup) {
+    adrRel pRel = new elmRel;
+    nextGroup(pRel) = pGroup;
+    nextRel(pRel) = NULL;
+
+    return pRel;
+}
+
+
+
+void joinGroup(listUser &LU, listGroup &LG, string noTelp, string namaGroup) {
+   adrUser pUser = searchData_User(LU,noTelp);
+   adrGroup pGroup = searchData_Group(LG,namaGroup);
+   adrRel rel;
+
+   rel = createElmRel(pGroup);
+   if (firstRel(pUser) == NULL) {
+        firstRel(pUser) = rel;
+   } else {
+        adrRel Q;
+        Q = firstRel(pUser);
+        while (nextRel(Q) != NULL) {
+            Q = nextRel(Q);
+        }
+        nextRel(Q) = rel;
+   }
+   infoGroup(pGroup).numOfMember++;
+   cout << infoUser(pUser).nama << " Joined " << infoGroup(pGroup).groupName << "." << endl;
+
+   cout << endl;
 }
 
