@@ -88,4 +88,7 @@ void showGroupMember(listGroup LG, listUser LU, string &option);
 void joinGroup_menu(listUser &LU, listGroup &LG, string &option);
 void joinGroup(listUser &LU, listGroup &LG, string noTelp, string namaGroup);
 void load_dataset(listUser &LU, listGroup &LG);
+void searchUserinGroup(listGroup LG, listUser LU, string &option);
+adrRel searchData_Rel(listUser LU, listGroup LG, string namaGroup, adrUser pUser);
+void showGroupMem5(listGroup LG, string &option);
 #endif /*WHATSAPP_H_INCLUDED*/
