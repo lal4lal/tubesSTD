@@ -36,7 +36,15 @@ int main() {
         } else if (option == 6) {
             addUsers(LU, backToMenu);
         } else if (option == 7) {
+<<<<<<< HEAD
             joinGroup_menu(LU,LG);
+=======
+            joinGroup_menu(LU,LG, backToMenu);
+        } else if (option == 8) {
+            showGroupMember(LG, LU, backToMenu);
+        } else if (option == 9) {
+            searchUserinGroup(LG, LU, backToMenu);
+>>>>>>> 7fc474c53072a6b87d06155acd7585055a52fc1a
         }
         if (backToMenu == "Y") {
             menu();
