@@ -265,15 +265,6 @@ void joinGroup_menu(listUser &LU, listGroup &LG, string &option) {
 };
 
 
-<<<<<<< HEAD
-// 8.	Menampilkan seluruh data grup beserta usernya (15) DONE
-void showAlldata_GroupMenu(listGroup LG, listUser LU) {
-    cout << "*==================================================*" << endl;
-    cout << "|               Show All Group Data                |" << endl;
-    cout << "*==================================================*" << endl;
-    showAlldata_Group(LG,LU);
-};
-=======
 // 8.	Menampilkan seluruh data grup beserta usernya (15) NOT YET
 void showGroupMember(listGroup LG, listUser LU, string &option) {
     cout << "*==================================================*" << endl;
@@ -320,7 +311,6 @@ void showGroupMember(listGroup LG, listUser LU, string &option) {
     cout << endl;
 }
 
->>>>>>> 7fc474c53072a6b87d06155acd7585055a52fc1a
 // 9.	Mencari data user pada grup tertentu (10) NOT YET
 void searchUserinGroup(listGroup LG, listUser LU, string &option) {
     string noTelepon, namaGroup;
@@ -338,12 +328,12 @@ void searchUserinGroup(listGroup LG, listUser LU, string &option) {
         pRel = searchData_Rel(LU, LG, namaGroup, pUser);
         if (pRel != NULL) {
             cout << "*==================================================*" << endl;
-            cout << "  " << infoUser(pUser).nama << " (" << infoUser(pUser).noTelepon << ") tergabung di grup " << infoGroup(nextGroup(pRel)).groupName << endl;  
+            cout << "  " << infoUser(pUser).nama << " (" << infoUser(pUser).noTelepon << ") tergabung di grup " << infoGroup(nextGroup(pRel)).groupName << endl;
             cout << "*==================================================*" << endl;
             cout << endl;
         } else {
             cout << "*==================================================*" << endl;
-            cout << "  " << infoUser(pUser).nama << " (" << infoUser(pUser).noTelepon << ") Not Found " << endl;  
+            cout << "  " << infoUser(pUser).nama << " (" << infoUser(pUser).noTelepon << ") Not Found " << endl;
             cout << "*==================================================*" << endl;
             cout << endl;
         }
@@ -362,9 +352,30 @@ void searchUserinGroup(listGroup LG, listUser LU, string &option) {
 }
 
 // 10.	Menghapus data user pada grup tertentu beserta relasinya (15) NOT YET
-void leftGroup(listUser &LU, listGroup &LG) {
+void leftGroupMenu(listUser &LU, listGroup &LG, string &option) {
+    string noTelepon, namaGroup;
+    cout << "*==================================================*" << endl;
+    cout << "|                   Left Group                     |" << endl;
+    cout << "*==================================================*" << endl;
+    cout << "  Masukkan No Telepon Anda: ";
+    cin >> noTelepon;
+    cout << "  Masukkan Nama Group yang Anda ingin bergabung: ";
+    cin >> namaGroup;
+    cout << endl;
+    adrUser pUser = searchData_User(LU,noTelepon);
 
-}
+    leftGroup(LU,LG,noTelepon,namaGroup);
+    cout << "*==================================================*" << endl;
+    cout << "  " << infoUser(pUser).nama  << " Kicked from " << namaGroup << "." << endl;
+    cout << "*==================================================*" << endl;
+    cout << endl;
+
+    cout << "*==================================================*" << endl;
+    cout << "  Kembali ke Menu ketik (Y/N): ";
+    cin >> option;
+    cout << "*==================================================*" << endl;
+    cout << endl;
+};
 
 // 11.	Menampilkan data grup yang jumlah usernya di bawah 5 orang (5) NOT YET
 void showGroupMem5(listGroup LG, string &option) {
@@ -398,5 +409,3 @@ void showGroupMem5(listGroup LG, string &option) {
     cout << "*==================================================*" << endl;
     cout << endl;
 }
-
-

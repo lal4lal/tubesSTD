@@ -1,4 +1,4 @@
-#include "whatsapp.h"
+#include "whatsApp.h"
 #include <iostream>
 using namespace std;
 
@@ -20,6 +20,7 @@ int main() {
     createListGroup(LG);
     createListUser(LU);
 
+    load_dataset(LU, LG);
     menu();
     takeOption(option);
     while (option != 0) {
@@ -36,22 +37,20 @@ int main() {
         } else if (option == 6) {
             addUsers(LU, backToMenu);
         } else if (option == 7) {
-<<<<<<< HEAD
-            joinGroup_menu(LU,LG);
-=======
             joinGroup_menu(LU,LG, backToMenu);
         } else if (option == 8) {
             showGroupMember(LG, LU, backToMenu);
         } else if (option == 9) {
             searchUserinGroup(LG, LU, backToMenu);
->>>>>>> 7fc474c53072a6b87d06155acd7585055a52fc1a
+        } else if (option == 10) {
+            leftGroupMenu(LU,LG,backToMenu);
         }
         if (backToMenu == "Y") {
             menu();
             takeOption(option);
         } else {
             option = 0;
-        } 
+        }
     }
 
     return 0;

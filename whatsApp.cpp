@@ -228,41 +228,6 @@ void joinGroup(listUser &LU, listGroup &LG, string noTelp, string namaGroup) {
    cout << endl;
 }
 
-void showAlldata_Group(listGroup LG, listUser LU) {
-    if (firstGroup(LG) == NULL) {
-        cout << "Group Isn't created yet";
-    } else {
-        adrGroup check;
-        check = firstGroup(LG);
-        while (nextGroup(check) != firstGroup(LG)) {
-            cout << "Group Name : " << infoGroup(check).groupName << endl;
-            cout << "Total Participant : " << infoGroup(check).numOfMember << endl;
-            cout << "List participant :" << endl;
-            int i = 1;
-            adrUser lastUser = firstUser(LU);
-            while ( lastUser != NULL ) {
-                bool foundRel = false;
-                adrRel checkRel = firstRel(lastUser);
-                while(checkRel != NULL && !foundRel) {
-                    if (nextGroup(checkRel) == check ) {
-                       foundRel = true;
-                    }
-                    checkRel = nextRel(checkRel);
-                }
-                if (foundRel) {
-                    cout << i << ". " << infoUser(lastUser).nama << endl;
-                    i++;
-                }else {
-                    lastUser = nextUser(lastUser);
-                }
-            }
-            cout << endl;
-            check = nextGroup(check);
-        }
-    }
-}
-
-
 void load_dataset(listUser &LU, listGroup &LG) {
     infotypeUser user;
     infotypeGroup grup;
@@ -313,4 +278,45 @@ void load_dataset(listUser &LU, listGroup &LG) {
 
     joinGroup(LU, LG, "3", "tanpaImam");
     joinGroup(LU, LG, "3", "RPLa");
+}
+
+
+void leftGroup(listUser LU,listGroup LG, string phoneNum,string groupName) {
+    adrUser pUser = searchData_User(LU,phoneNum);
+    adrGroup pGroup = searchData_Group(LG,groupName);
+    bool found = false;
+
+    adrRel relUser;
+    relUser = firstRel(pUser);
+    while (nextRel(relUser) != NULL && !found) {
+        if (nextGroup(relUser) == pGroup) {
+            found = true;
+        } else {
+            relUser = nextRel(relUser);
+        }
+    }
+
+    if (relUser == firstRel(pUser)) { // delete first
+        firstRel(pUser) = nextRel(relUser);
+        nextRel(relUser) = NULL;
+        nextGroup(relUser)= NULL;
+    } else if (nextRel(relUser) == NULL) { // delete last (ide : mencari elm sebelum relUser)
+        adrRel prevRel;
+        prevRel = firstRel(pUser);
+        while (nextRel(nextRel(prevRel)) != NULL) {
+            prevRel = nextRel(prevRel);
+        }
+        nextRel(prevRel) = NULL;
+        nextGroup(relUser) = NULL;
+    } else { // delete after relation (ide : mencari elm sebelum relUser = precRel)
+        adrRel precRel;
+        precRel = firstRel(pUser);
+        while ( nextRel(precRel) != relUser) {
+            precRel = nextRel(precRel);
+        }
+        nextRel(precRel) = nextRel(relUser);
+        nextRel(relUser) = NULL;
+        nextGroup(relUser) = NULL;
+    }
+
 }
