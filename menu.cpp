@@ -355,20 +355,35 @@ void searchUserinGroup(listGroup LG, listUser LU, string &option) {
 void leftGroupMenu(listUser &LU, listGroup &LG, string &option) {
     string noTelepon, namaGroup;
     cout << "*==================================================*" << endl;
-    cout << "|                   Left Group                     |" << endl;
+    cout << "|                     Left Group                   |" << endl;
     cout << "*==================================================*" << endl;
     cout << "  Masukkan No Telepon Anda: ";
     cin >> noTelepon;
-    cout << "  Masukkan Nama Group yang Anda ingin bergabung: ";
+    cout << "  Masukkan Nama Group yang Anda ingin Keluar: ";
     cin >> namaGroup;
     cout << endl;
     adrUser pUser = searchData_User(LU,noTelepon);
-
-    leftGroup(LU,LG,noTelepon,namaGroup);
-    cout << "*==================================================*" << endl;
-    cout << "  " << infoUser(pUser).nama  << " Kicked from " << namaGroup << "." << endl;
-    cout << "*==================================================*" << endl;
-    cout << endl;
+    adrRel pRel = searchData_Rel(LU, LG, namaGroup, pUser);
+    if (pRel != NULL && pUser != NULL) {
+        leftGroup(LU,LG,noTelepon,namaGroup);
+        cout << "*==================================================*" << endl;
+        cout << "  " << infoUser(pUser).nama  << " Kicked from " << namaGroup << "." << endl;
+        cout << "*==================================================*" << endl;
+        cout << endl;
+    } else {
+        if (pRel == NULL) {
+            cout << "*==================================================*" << endl;
+            cout << "  You're Not a member of " << namaGroup << endl;
+            cout << "*==================================================*" << endl;
+            cout << endl;
+        } else if (pUser == NULL) {
+            cout << "*==================================================*" << endl;
+            cout << "|                   User Not Found                 |" << endl;
+            cout << "|      Make Sure To Input Correct Phone Number     |" << endl;
+            cout << "*==================================================*" << endl;
+            cout << endl;
+        }
+    }
 
     cout << "*==================================================*" << endl;
     cout << "  Kembali ke Menu ketik (Y/N): ";
