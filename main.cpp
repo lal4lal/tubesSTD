@@ -42,13 +42,15 @@ int main() {
             showGroupMember(LG, LU, backToMenu);
         } else if (option == 9) {
             searchUserinGroup(LG, LU, backToMenu);
+        } else if (option == 10) {
+            leftGroupMenu(LU,LG,backToMenu);
         }
         if (backToMenu == "Y") {
             menu();
             takeOption(option);
         } else {
             option = 0;
-        } 
+        }
     }
 
     return 0;
