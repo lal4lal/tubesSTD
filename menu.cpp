@@ -424,18 +424,17 @@ void showGroupMem5(listGroup LG, string &option) {
         cout << "*==================================================*" << endl;
         cout << endl;
     } else {
-        adrGroup Q;
-        Q = firstGroup(LG);
+        pGroup = firstGroup(LG);
         cout << "*==================================================*" << endl;
         do {
             if (infoGroup(pGroup).numOfMember < 5) {
-                cout << "  Group Name : " << infoGroup(Q).groupName << endl;
-                cout << "  Member : " << infoGroup(Q).numOfMember << endl;
+                cout << "  Group Name : " << infoGroup(pGroup).groupName << endl;
+                cout << "  Member : " << infoGroup(pGroup).numOfMember << endl;
                 cout << endl;
                 Count++;
             }
-            Q = nextGroup(Q);
-        } while (nextGroup(Q) != nextGroup(firstGroup(LG)));
+            pGroup = nextGroup(pGroup);
+        } while (nextGroup(pGroup) != nextGroup(firstGroup(LG)));
         if (Count == 0) {
             cout << "|          NO GROUP HAS MEMBER LESS THEN 5         |" << endl;
         }
