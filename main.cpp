@@ -24,7 +24,7 @@ int main() {
     menu();
     takeOption(option);
     while ((option == "1" || option == "2" || option == "3" || option == "4" || option == "5" || option == "6" || option == "7" ||
-           option == "8" || option == "9" || option == "10") && option != "0" ) {
+           option == "8" || option == "9" || option == "10") || option == "11") {
         if (option == "1") {
             addGroups(LG, backToMenu);
         } else if (option == "2") {
@@ -45,8 +45,10 @@ int main() {
             searchUserinGroup(LG, LU, backToMenu);
         } else if (option == "10") {
             leftGroupMenu(LU,LG,backToMenu);
+        } else if (option == "11") {
+            showGroupMem5(LG, backToMenu);
         }
-        if (backToMenu == "Y") {
+        if (backToMenu == "Y" || backToMenu == "y") {
             menu();
             takeOption(option);
         }

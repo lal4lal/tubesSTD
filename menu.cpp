@@ -33,8 +33,6 @@ void menu() {
     cout << "|      11. Menampilkan data grup yang jumlah       |" << endl;
     cout << "|          usernya di bawah 5 orang (5)            |" << endl;
     cout << "|                                                  |" << endl;
-    cout << "|      12. Kembali ke Menu                         |" << endl;
-    cout << "|                                                  |" << endl;
     cout << "|      0. Keluar                                   |" << endl;
     cout << "|                                                  |" << endl;
     cout << "*==================================================*" << endl;
@@ -49,7 +47,7 @@ void takeOption(string &option) {
     cin >> option;
     cout << endl;
     while (option != "0" && option != "1" && option != "2" && option != "3" && option != "4" && option != "5" && option != "6" && option != "7" &&
-           option != "8" && option != "9" && option != "10") {
+           option != "8" && option != "9" && option != "10" && option != "11") {
         cout << "*==================================================*" << endl;
         cout << "|                Masukkan Salah!!!                 |" << endl;
         cout << "|          Mohon Masukkan angka yang benar         |" << endl;
@@ -77,10 +75,8 @@ void addGroups(listGroup &LG, string &option) {
     cout << "*==================================================*" << endl;
     cout << endl;
 
-    cout << "*==================================================*" << endl;
     cout << "  Kembali ke Menu ketik (Y/N): ";
     cin >> option;
-    cout << "*==================================================*" << endl;
     cout << endl;
 }
 
@@ -108,10 +104,8 @@ void showAlldata_Group(listGroup LG, string &option) {
         cout << "*==================================================*" << endl;
         cout << endl;
     }
-    cout << "*==================================================*" << endl;
     cout << "  Kembali ke Menu ketik (Y/N): ";
     cin >> option;
-    cout << "*==================================================*" << endl;
     cout << endl;
 }
 
@@ -138,10 +132,8 @@ void hapusGrup(listUser &LU, listGroup &LG, string &option) {
         cout << "*==================================================*" << endl;
         cout << endl;
     }
-    cout << "*==================================================*" << endl;
     cout << "  Kembali ke Menu ketik (Y/N): ";
     cin >> option;
-    cout << "*==================================================*" << endl;
     cout << endl;
 }
 
@@ -173,10 +165,8 @@ void cariDataGrup(listGroup LG, string &option) {
         cout << "*==================================================*" << endl;
         cout << endl;
     }
-    cout << "*==================================================*" << endl;
     cout << "  Kembali ke Menu ketik (Y/N): ";
     cin >> option;
-    cout << "*==================================================*" << endl;
     cout << endl;
 }
 
@@ -207,10 +197,8 @@ void cariDataUser(listUser LU, string &option) {
         cout << "*==================================================*" << endl;
         cout << endl;
     }
-    cout << "*==================================================*" << endl;
     cout << "  Kembali ke Menu ketik (Y/N): ";
     cin >> option;
-    cout << "*==================================================*" << endl;
     cout << endl;
 }
 
@@ -226,42 +214,79 @@ void addUsers(listUser &LU, string &option) {
     cout << "  Masukkan No Telepon: ";
     cin >> user.noTelepon;
 
-    pUser = createElmUser(user);
-    insertLast_User(LU, pUser);
-    cout << "*==================================================*" << endl;
-    cout << "|                  Input Data Sukses               |" << endl;
-    cout << "*==================================================*" << endl;
-    cout << endl;
-
-    cout << "*==================================================*" << endl;
+    pUser = searchData_User(LU, user.noTelepon);
+    if (pUser == NULL) {
+        pUser = createElmUser(user);
+        insertLast_User(LU, pUser);
+        cout << "*==================================================*" << endl;
+        cout << "|                  Input Data Sukses               |" << endl;
+        cout << "*==================================================*" << endl;
+        cout << endl;
+    } else {
+        cout << "*==================================================*" << endl;
+        cout << "|             Phone Number Already Used            |" << endl;
+        cout << "|      Make Sure To Input Correct Phone Number     |" << endl;
+        cout << "*==================================================*" << endl;
+        cout << endl;
+    }
     cout << "  Kembali ke Menu ketik (Y/N): ";
     cin >> option;
-    cout << "*==================================================*" << endl;
     cout << endl;
 }
 
 // 7.	Menghubungkan data grup ke data user (5) NOT YET
 void joinGroup_menu(listUser &LU, listGroup &LG, string &option) {
     string noTelepon, namaGroup;
-    cout << "*==================================================*" << endl;
-    cout << "|                     Join Group                   |" << endl;
-    cout << "*==================================================*" << endl;
-    cout << "  Masukkan No Telepon Anda: ";
-    cin >> noTelepon;
-    cout << "  Masukkan Nama Group yang Anda ingin bergabung: ";
-    cin >> namaGroup;
-    cout << endl;
+    do {
+        cout << "*==================================================*" << endl;
+        cout << "|                     Join Group                   |" << endl;
+        cout << "*==================================================*" << endl;
+        cout << "  Masukkan No Telepon Anda: ";
+        cin >> noTelepon;
+        cout << "  Masukkan Nama Group yang Anda ingin bergabung: ";
+        cin >> namaGroup;
+        cout << endl;
 
-    joinGroup(LU,LG,noTelepon,namaGroup);
-    cout << "*==================================================*" << endl;
-    cout << "  " << noTelepon << " Joined " << namaGroup << "." << endl;
-    cout << "*==================================================*" << endl;
-    cout << endl;
-
-    cout << "*==================================================*" << endl;
+        adrUser pUser = searchData_User(LU, noTelepon);
+        adrGroup pGroup = searchData_Group(LG, namaGroup);
+        adrRel pRel = searchData_Rel(LU, LG, namaGroup, pUser);
+        if (pUser != NULL) {
+            if (pGroup != NULL) {
+                if (pRel == NULL) {
+                    joinGroup(LU,LG,noTelepon,namaGroup);
+                    cout << "*==================================================*" << endl;
+                    cout << "  " << noTelepon << " Joined " << namaGroup << "." << endl;
+                    cout << "*==================================================*" << endl;
+                    cout << endl;
+                    option = "n";
+                } else {
+                    cout << "*==================================================*" << endl;
+                    cout << "  You've already Join Group " << namaGroup << endl;
+                    cout << "*==================================================*" << endl;
+                    cout << endl;
+                    option = "n";
+                }
+            } else {
+                cout << "*==================================================*" << endl;
+                cout << "|                   Group Not Found                |" << endl;
+                cout << "|       Make Sure To Input Correct Group Name      |" << endl;
+                cout << "*==================================================*" << endl;
+                cout << "  Ingin input ulang? (Y/N): ";
+                cin >> option;
+                cout << endl;
+            }
+        } else {
+            cout << "*==================================================*" << endl;
+            cout << "|                   User Not Found                 |" << endl;
+            cout << "|      Make Sure To Input Correct Phone Number     |" << endl;
+            cout << "*==================================================*" << endl;
+            cout << "  Ingin input ulang? (Y/N): ";
+            cin >> option;
+            cout << endl;
+        }
+    } while (option == "Y" || option == "y");
     cout << "  Kembali ke Menu ketik (Y/N): ";
     cin >> option;
-    cout << "*==================================================*" << endl;
     cout << endl;
 };
 
@@ -305,10 +330,8 @@ void showGroupMember(listGroup LG, listUser LU, string &option) {
     }
     cout << "*==================================================*" << endl;
     cout << endl;
-    cout << "*==================================================*" << endl;
     cout << "  Kembali ke Menu ketik (Y/N): ";
     cin >> option;
-    cout << "*==================================================*" << endl;
     cout << endl;
 }
 
@@ -345,10 +368,8 @@ void searchUserinGroup(listGroup LG, listUser LU, string &option) {
         cout << "*==================================================*" << endl;
         cout << endl;
     }
-    cout << "*==================================================*" << endl;
     cout << "  Kembali ke Menu ketik (Y/N): ";
     cin >> option;
-    cout << "*==================================================*" << endl;
     cout << endl;
 }
 
@@ -385,17 +406,15 @@ void leftGroupMenu(listUser &LU, listGroup &LG, string &option) {
             cout << endl;
         }
     }
-
-    cout << "*==================================================*" << endl;
     cout << "  Kembali ke Menu ketik (Y/N): ";
     cin >> option;
-    cout << "*==================================================*" << endl;
     cout << endl;
 };
 
 // 11.	Menampilkan data grup yang jumlah usernya di bawah 5 orang (5) NOT YET
 void showGroupMem5(listGroup LG, string &option) {
     adrGroup pGroup = firstGroup(LG);
+    int Count = 0;
     cout << "*==================================================*" << endl;
     cout << "|                 Group Below 5 Member             |" << endl;
     cout << "*==================================================*" << endl;
@@ -413,15 +432,17 @@ void showGroupMem5(listGroup LG, string &option) {
                 cout << "  Group Name : " << infoGroup(Q).groupName << endl;
                 cout << "  Member : " << infoGroup(Q).numOfMember << endl;
                 cout << endl;
+                Count++;
             }
             Q = nextGroup(Q);
         } while (nextGroup(Q) != nextGroup(firstGroup(LG)));
+        if (Count == 0) {
+            cout << "|          NO GROUP HAS MEMBER LESS THEN 5         |" << endl;
+        }
         cout << "*==================================================*" << endl;
         cout << endl;
     }
-    cout << "*==================================================*" << endl;
     cout << "  Kembali ke Menu ketik (Y/N): ";
     cin >> option;
-    cout << "*==================================================*" << endl;
     cout << endl;
 }
