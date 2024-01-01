@@ -41,14 +41,15 @@ void menu() {
     cout << endl;
 }
 
-void takeOption(int &option) {
+void takeOption(string &option) {
     cout << "*==================================================*" << endl;
     cout << "|                Masukkan Pilihan Menu             |" << endl;
     cout << "*==================================================*" << endl;
     cout << "  Masukkan Pilihan Anda: ";
     cin >> option;
     cout << endl;
-    while (option < 0 || option > 12) {
+    while (option != "0" && option != "1" && option != "2" && option != "3" && option != "4" && option != "5" && option != "6" && option != "7" &&
+           option != "8" && option != "9" && option != "10") {
         cout << "*==================================================*" << endl;
         cout << "|                Masukkan Salah!!!                 |" << endl;
         cout << "|          Mohon Masukkan angka yang benar         |" << endl;

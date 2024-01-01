@@ -76,7 +76,7 @@ void insertLast_User(listUser &LU, adrUser pUser);
 // 5. mencari data user
 adrUser searchData_User(listUser LU, string noTelepon);
 void showAlldata_User(listUser LU);
-void takeOption(int &option);
+void takeOption(string &option);
 void menu();
 void addUsers(listUser &LU, string &option);
 void hapusGrup(listUser &LU, listGroup &LG, string &option);
