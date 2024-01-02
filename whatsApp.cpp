@@ -40,7 +40,6 @@ void insertLast_Group(listGroup &LG, adrGroup pGroup){
     }
 }
 
-// 3.	Menghapus data grup beserta relasinya (15)
 void deleteGroup(listGroup &LG, adrGroup &delGroup, string namaGroup) {
     delGroup = searchData_Group(LG, namaGroup);
     if (delGroup != NULL) {
@@ -96,8 +95,6 @@ void deleteRel(listUser &LU, adrRel precDel, adrRel &delRel, adrUser pUser) {
     delRel = precDel;
 }
 
-
-
 void deleteGroup_rel(listGroup &LG, listUser &LU, string namaGroup , adrGroup &delGroup) {
     adrUser pUser = firstUser(LU);
     adrRel delRel, pRel;
@@ -120,8 +117,6 @@ void deleteGroup_rel(listGroup &LG, listUser &LU, string namaGroup , adrGroup &d
     deleteGroup(LG, delGroup, namaGroup);
 }
 
-
-// 4. Mencari data grup (5) & Mencari data user (5)
 adrGroup searchData_Group(listGroup LG, string namaGroup) {
     bool found =false;
     adrGroup Q;
@@ -145,7 +140,6 @@ adrGroup searchData_Group(listGroup LG, string namaGroup) {
         return NULL;
     }
 }
-
 
 void insertLast_User(listUser &LU, adrUser pUser){
     if (firstUser(LU) == NULL) {
@@ -198,8 +192,6 @@ void showAlldata_User(listUser LU) {
     }
 }
 
-// 7.
-
 adrRel createElmRel(adrGroup pGroup) {
     adrRel pRel = new elmRel;
     nextGroup(pRel) = pGroup;
@@ -227,7 +219,6 @@ void joinGroup(listUser &LU, listGroup &LG, string noTelp, string namaGroup) {
    infoGroup(pGroup).numOfMember++;
    cout << endl;
 }
-
 
 
 void leftGroup(listUser LU,listGroup LG, string phoneNum,string groupName) {
@@ -267,7 +258,7 @@ void leftGroup(listUser LU,listGroup LG, string phoneNum,string groupName) {
         nextRel(relUser) = NULL;
         nextGroup(relUser) = NULL;
     }
-
+    infoGroup(pGroup).numOfMember--;
 }
 
 void load_dataset(listUser &LU, listGroup &LG) {

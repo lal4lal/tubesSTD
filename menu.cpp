@@ -68,12 +68,19 @@ void addGroups(listGroup &LG, string &option) {
     cin >> grup.groupName;
     grup.numOfMember = 0;
 
-    pGroup = createElmGroup(grup);
-    insertLast_Group(LG, pGroup);
-    cout << "*==================================================*" << endl;
-    cout << "|                  Input Data Sukses               |" << endl;
-    cout << "*==================================================*" << endl;
-    cout << endl;
+    pGroup = searchData_Group(LG, grup.groupName);
+    if (pGroup == NULL) {
+        pGroup = createElmGroup(grup);
+        insertLast_Group(LG, pGroup);
+        cout << "*==================================================*" << endl;
+        cout << "|                  Input Data Sukses               |" << endl;
+        cout << "*==================================================*" << endl;
+        cout << endl;
+    } else {
+        cout << "*==================================================*" << endl;
+        cout << "|               Group Already Exsisted             |" << endl;
+        cout << "*==================================================*" << endl;
+    }
 
     cout << "  Kembali ke Menu ketik (Y/N): ";
     cin >> option;
@@ -288,8 +295,7 @@ void joinGroup_menu(listUser &LU, listGroup &LG, string &option) {
     cout << "  Kembali ke Menu ketik (Y/N): ";
     cin >> option;
     cout << endl;
-};
-
+}
 
 // 8.	Menampilkan seluruh data grup beserta usernya (15) NOT YET
 void showGroupMember(listGroup LG, listUser LU, string &option) {
@@ -347,19 +353,27 @@ void searchUserinGroup(listGroup LG, listUser LU, string &option) {
     cin >> namaGroup;
     cout << endl;
     adrUser pUser = searchData_User(LU, noTelepon);
+    adrGroup pGroup = searchData_Group(LG, namaGroup);
     adrRel pRel;
     if (pUser != NULL) {
-        pRel = searchData_Rel(LU, LG, namaGroup, pUser);
-        if (pRel != NULL) {
-            cout << "*==================================================*" << endl;
-            cout << "  " << infoUser(pUser).nama << " (" << infoUser(pUser).noTelepon << ") tergabung di grup " << infoGroup(nextGroup(pRel)).groupName << endl;
-            cout << "*==================================================*" << endl;
-            cout << endl;
+        if (pGroup != NULL) {
+            pRel = searchData_Rel(LU, LG, namaGroup, pUser);
+            if (pRel != NULL) {
+                cout << "*==================================================*" << endl;
+                cout << "  " << infoUser(pUser).nama << " (" << infoUser(pUser).noTelepon << ") tergabung di grup " << infoGroup(nextGroup(pRel)).groupName << endl;
+                cout << "*==================================================*" << endl;
+                cout << endl;
+            } else {
+                cout << "*==================================================*" << endl;
+                cout << "  " << infoUser(pUser).nama << " (" << infoUser(pUser).noTelepon << ") Not Member of " << namaGroup << endl;
+                cout << "*==================================================*" << endl;
+                cout << endl;
+            }
         } else {
             cout << "*==================================================*" << endl;
-            cout << "  " << infoUser(pUser).nama << " (" << infoUser(pUser).noTelepon << ") Not Found " << endl;
+            cout << "|                   Group Not Found                |" << endl;
+            cout << "|       Make Sure To Input Correct Group Name      |" << endl;
             cout << "*==================================================*" << endl;
-            cout << endl;
         }
     } else {
         cout << "*==================================================*" << endl;
@@ -386,30 +400,30 @@ void leftGroupMenu(listUser &LU, listGroup &LG, string &option) {
     cout << endl;
     adrUser pUser = searchData_User(LU,noTelepon);
     adrRel pRel = searchData_Rel(LU, LG, namaGroup, pUser);
-    if (pRel != NULL && pUser != NULL) {
-        leftGroup(LU,LG,noTelepon,namaGroup);
-        cout << "*==================================================*" << endl;
-        cout << "  " << infoUser(pUser).nama  << " Kicked from " << namaGroup << "." << endl;
-        cout << "*==================================================*" << endl;
-        cout << endl;
-    } else {
-        if (pRel == NULL) {
+    if (pUser != NULL) {
+        if (pRel != NULL) {
+            leftGroup(LU,LG,noTelepon,namaGroup);
+            cout << "*==================================================*" << endl;
+            cout << "  " << infoUser(pUser).nama  << " Kicked from " << namaGroup << "." << endl;
+            cout << "*==================================================*" << endl;
+            cout << endl;
+        } else {
             cout << "*==================================================*" << endl;
             cout << "  You're Not a member of " << namaGroup << endl;
             cout << "*==================================================*" << endl;
             cout << endl;
-        } else if (pUser == NULL) {
-            cout << "*==================================================*" << endl;
-            cout << "|                   User Not Found                 |" << endl;
-            cout << "|      Make Sure To Input Correct Phone Number     |" << endl;
-            cout << "*==================================================*" << endl;
-            cout << endl;
         }
+    } else {
+        cout << "*==================================================*" << endl;
+        cout << "|                   User Not Found                 |" << endl;
+        cout << "|      Make Sure To Input Correct Phone Number     |" << endl;
+        cout << "*==================================================*" << endl;
+        cout << endl;
     }
     cout << "  Kembali ke Menu ketik (Y/N): ";
     cin >> option;
     cout << endl;
-};
+}
 
 // 11.	Menampilkan data grup yang jumlah usernya di bawah 5 orang (5) NOT YET
 void showGroupMem5(listGroup LG, string &option) {

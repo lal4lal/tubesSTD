@@ -16,7 +16,6 @@ int main() {
     string option;
     string backToMenu;
 
-    // HARDCODED GROUP //
     createListGroup(LG);
     createListUser(LU);
 
@@ -51,8 +50,13 @@ int main() {
         if (backToMenu == "Y" || backToMenu == "y") {
             menu();
             takeOption(option);
+        } else {
+            option = "0";
         }
     }
+    cout << "*==================================================*" << endl;
+    cout << "|                    TERIMA KASIH                  |" << endl;
+    cout << "*==================================================*" << endl;
 
     return 0;
 }
